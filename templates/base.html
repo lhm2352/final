@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load staticfiles %}
+
+<head>
+    <title>{% block title %}혼밥세끼{% endblock %}</title>
+</head>
+
+
+<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}" />
+<link rel="stylesheet" type="text/css" href="{% block extrastyle %}{% endblock %}"/>
+
+<body>
+    <div id="header">
+        <h2 class="maintitle"><img src="{% static 'img/혼밥세끼.png' %}" style="height:60px;">혼밥세끼</h2>
+
+        {% if user.is_active %}
+        <h4 class="welcome">환영합니다,
+            <strong>{% firstof user.get_short_name user.get_username %}님</strong>
+            <a href="{% url 'logout' %}">로그아웃</a>
+        </h4>
+        {% else %}
+        <h4 class="welcome">환영합니다, 게스트 사용자님 /
+            <a href="{% url 'login' %}">로그인</a>
+            <a href="{% url 'register' %}">회원가입</a>
+        </h4>
+        {% endif %}
+    </div>
+
+    <div id="menu">
+        <li><a href ="{% url 'fridge:scrap_list' %}">My 스크랩</a></li>
+        <li><a href ="{% url 'fridge:shopping' %}">장보기 체크리스트</a></li>
+        <li><a href ="{% url 'fridge:manage' %}">냉장고 관리</a></li>
+        <li><a href ="{% url 'fridge:recommendation' %}">꺼내 먹기</a></li>
+        <style type="text/css">
+            a:link {text-decoration: none; color: white;}
+            a:visited {text-decoration: none; color: white;}
+            a:active {text-decoration: none; color: grey;}
+            a:hover {text-decoration: underline; color: red;}
+         </style>
+
+    </div>
+    {% block content %} {% endblock %}
+</body>
+</html>

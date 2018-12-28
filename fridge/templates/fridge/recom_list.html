@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}꺼내먹기{% endblock %}
+
+{% load staticfiles %}
+{% block extrastyle %}{% static "fridge/recom_list.css" %}{% endblock %}
+
+{% block content %}
+<div id="content">
+    <div id="recipe_recom">
+        <ul>
+            {% for recom in recom_list %}
+            {% if recom == 0 %}
+            <div class="recipe_recom_photo">
+                <h2>추천없음</h2>
+            </div>
+            {% else %}
+                <div class = "recipe_recom_photo">
+                    {% if recom.menu_thumbnail %}
+                        <img src="{{ recom.menu_thumbnail.url }}" />
+                    {% endif %}
+                    <li><a href ="{% url 'fridge:menu_detail' pk=recom.pk %}">{{ recom.menu_name }}</a></li>
+                            <style type="text/css">
+                                a:link {text-decoration: none; color: black;}
+                                a:visited {text-decoration: none; color: black;}
+                                a:active {text-decoration: none; color: grey;}
+                                a:hover {text-decoration: underline; color: red;}
+                            </style>
+                </div>
+            {% endif %}
+                {% endfor %}
+            </ul>
+    </div>
+    <div id="my_fridge">
+        <h5 style="font-size : 20px">[MY 냉장고]</h5>
+
+    <div id="fridge-container">
+        <div id="coldItemContainer">
+            <p>냉장</p>
+            <ul>
+            {% for a in cold%}
+                <div class="temp">
+                    <li class="fridgeitems" id="item-{{a.iteminfo.id}}"> {{a.iteminfo}} </li>
+                </div>
+            {% endfor %}
+            </ul>
+
+        </div>
+        <div id="frozenItemContainer">
+            <p>냉동</p>
+            <ul>
+            {% for a in frozen%}
+                <li class="fridgeitems" id="item-{{a.iteminfo.id}}"> {{a.iteminfo}} </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div id="warmItemContainer">
+            <p>실온</p>
+            <ul>
+            {% for a in warm%}
+                <li class="fridgeitems" id="item-{{a.iteminfo.id}}"> {{a.iteminfo}} </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    </div>
+</div>
+ 
+
+
+
+   <!--      <ul>
+            <li>계란 50개</li>
+            <li>양파 100개</li>
+            <li>두부 30모</li>
+            <li>소고기 국거리용 1000g</li>
+        </ul>
+ -->
+
+    </div>
+</div>
+{% endblock %}

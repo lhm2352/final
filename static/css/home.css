@@ -1,0 +1,11 @@
+div#content_home{
+    position: absolute;
+    top: 95px;
+    width : 100%
+}
+
+div#homeimg{
+    background: #ddd;
+    padding: 5px 0 1px 0;
+    text-align: center;
+}
